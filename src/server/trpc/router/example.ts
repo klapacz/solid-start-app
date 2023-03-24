@@ -28,7 +28,7 @@ export default router({
       }),
     session: authedProcedure.query(async ({ ctx }) => {
       return {
-        email: ctx.email,
+        email: ctx.session.data.email,
       };
     }),
   }),

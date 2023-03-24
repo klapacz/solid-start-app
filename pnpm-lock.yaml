@@ -6,6 +6,7 @@ specifiers:
   '@tanstack/solid-query': ^5.0.0-alpha.2
   '@trpc/client': ^10.12.0
   '@trpc/server': ^10.12.0
+  '@types/debug': ^4.1.7
   '@types/node': ^18.14.0
   '@types/uuid': ^9.0.1
   '@typescript-eslint/eslint-plugin': ^5.52.0
@@ -22,6 +23,7 @@ specifiers:
   solid-start-vercel: ^0.2.21
   solid-trpc: 0.1.0-sssr.7
   tailwindcss: ^3.2.7
+  ts-results: ^3.3.0
   typescript: ^4.9.5
   undici: 5.20.0
   uuid: ^9.0.0
@@ -39,11 +41,13 @@ dependencies:
   solid-start: 0.2.23_pc3ngfh4lero77uk2crhxvl7ye
   solid-start-trpc: 0.0.16_nclumxup4vvamaixskc4tjj3ou
   solid-trpc: 0.1.0-sssr.7_2hvsn6mew3f4be6o4edvawygye
+  ts-results: 3.3.0
   undici: 5.20.0
   uuid: 9.0.0
   zod: 3.21.4
 
 devDependencies:
+  '@types/debug': 4.1.7
   '@types/node': 18.15.5
   '@types/uuid': 9.0.1
   '@typescript-eslint/eslint-plugin': 5.56.0_iskin7c6dxqunwflhstekcjqmq
@@ -1637,6 +1641,12 @@ packages:
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
 
+  /@types/debug/4.1.7:
+    resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
+    dependencies:
+      '@types/ms': 0.7.31
+    dev: true
+
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
 
@@ -1645,6 +1655,10 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/ms/0.7.31:
+    resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
   /@types/node/18.15.5:
@@ -4348,6 +4362,10 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       regexparam: 1.3.0
+
+  /ts-results/3.3.0:
+    resolution: {integrity: sha512-FWqxGX2NHp5oCyaMd96o2y2uMQmSu8Dey6kvyuFdRJ2AzfmWo3kWa4UsPlCGlfQ/qu03m09ZZtppMoY8EMHuiA==}
+    dev: false
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}

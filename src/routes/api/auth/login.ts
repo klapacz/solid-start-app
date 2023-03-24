@@ -2,6 +2,7 @@ import { createCookieSessionStorage } from "solid-start";
 import type { APIEvent } from "solid-start/api";
 import { redirect } from "solid-start/api";
 import { json } from "solid-start/api";
+import { Err, Ok, Result } from "ts-results";
 import { z } from "zod";
 import { serverEnv } from "~/env/server";
 import { redis } from "~/server/redis";
@@ -17,6 +18,22 @@ export const storage = createCookieSessionStorage({
     httpOnly: true,
   },
 });
+
+const SessionSchema = z.object({
+  // todo: use user id
+  email: z.string().email(),
+});
+
+export async function getSession(request: Request) {
+  const rawStorage = await storage.getSession(request.headers.get("Cookie"));
+  const rawData = SessionSchema.safeParse({
+    email: rawStorage.get("email"),
+  });
+  if (!rawData.success) {
+    return Err(rawData.error);
+  }
+  return Ok({ data: rawData.data, storage: rawStorage });
+}
 
 export async function GET({ request }: APIEvent) {
   const url = new URL(request.url);
