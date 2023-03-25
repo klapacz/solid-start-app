@@ -2,6 +2,7 @@ import { z } from "zod";
 import { procedure, router } from "../utils";
 import { v4 as uuid } from "uuid";
 import { redis } from "~/server/redis";
+import { Users } from "~/lib/auth/user";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -14,8 +15,12 @@ export default router({
         })
       )
       .mutation(async ({ input }) => {
+        const user = await Users.findOrCreateByEmail(input.email);
+        if (user.isErr()) {
+          throw new Error("Couldn't find or create user for given email.");
+        }
         const token = uuid();
-        redis.set(`email:${token}`, input.email, {
+        redis.set(`email:${token}`, user.value.id, {
           ex: 60 * 60 * 24, // expires in 24 hours
         });
         const url = new URL(

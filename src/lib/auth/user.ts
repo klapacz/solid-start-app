@@ -1,9 +1,11 @@
+import type { Selectable } from "kysely";
 import { sql } from "kysely";
 import { ResultAsync } from "neverthrow";
-import { db } from "../core/db";
+import { db } from "~/lib/core/db";
+import type { User } from "~/lib/core/db/schema.generated";
 
 export const Users = {
-  findOrCreateByEmail(email: string) {
+  findOrCreateByEmail(email: string): ResultAsync<Selectable<User>, unknown> {
     return ResultAsync.fromPromise(
       db
         .with("maybe_created_user", () =>
@@ -23,6 +25,17 @@ export const Users = {
             .selectAll("user")
             .where("email", "=", sql<string>`lower(trim(${email}))`)
         )
+        .executeTakeFirstOrThrow(),
+      (err) => err
+    );
+  },
+  updateSetConfirmed(userId: string): ResultAsync<Selectable<User>, unknown> {
+    return ResultAsync.fromPromise(
+      db
+        .updateTable("user")
+        .set({ status: "CONFIRMED" })
+        .where("id", "=", userId)
+        .returningAll()
         .executeTakeFirstOrThrow(),
       (err) => err
     );

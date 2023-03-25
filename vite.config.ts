@@ -12,9 +12,9 @@ export default defineConfig(() => {
       threads: false,
       isolate: false,
     },
-    resolve: {
-      conditions: ["development", "browser"],
-    },
+    // resolve: {
+    //   conditions: ["development", "browser"],
+    // },
 
     plugins: [solid({ ssr: true, adapter: vercel({ edge: false }) })],
   };

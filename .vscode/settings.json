@@ -3,6 +3,7 @@
     "authed",
     "codegen",
     "getdel",
+    "kobalte",
     "kysely",
     "neverthrow",
     "ossp",

@@ -1,8 +1,8 @@
 import type { APIEvent } from "solid-start/api";
 import { redirect } from "solid-start/api";
 import { json } from "solid-start/api";
-import { z } from "zod";
 import { storage } from "~/lib/auth/session";
+import { Users } from "~/lib/auth/user";
 import { redis } from "~/server/redis";
 
 export async function GET({ request }: APIEvent) {
@@ -12,15 +12,17 @@ export async function GET({ request }: APIEvent) {
     return json({ message: "Token not provided." }, { status: 400 });
   }
 
-  const savedEmail = await redis.getdel<string>(`email:${token}`);
-  const email = z.string().email().safeParse(savedEmail);
-
-  if (!email.success) {
-    return json({ message: "Bad request." }, { status: 400 });
+  const userId = await redis.getdel<string>(`email:${token}`);
+  if (!userId) {
+    return json({ message: "Invalid token." }, { status: 400 });
+  }
+  const user = await Users.updateSetConfirmed(userId);
+  if (user.isErr()) {
+    return json("Server error.", { status: 500 });
   }
 
   const session = await storage.getSession();
-  session.set("email", email.data);
+  session.set("email", user.value.email);
   return redirect("/", {
     headers: {
       "Set-Cookie": await storage.commitSession(session),

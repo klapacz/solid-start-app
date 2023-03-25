@@ -29,6 +29,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
+    "@kobalte/core": "^0.8.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.7.0",
     "@tanstack/solid-query": "^5.0.0-alpha.2",
