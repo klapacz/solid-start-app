@@ -4,11 +4,12 @@ import { getSession, storage } from "./session";
 export function createLogoutAction$() {
   return createServerAction$(
     async (_, { request }) => {
-      console.log("logout");
-      const { session } = (await getSession(request)).unwrap();
+      const session = await getSession(request);
       return redirect("/login", {
         headers: {
-          "Set-Cookie": await storage.destroySession(session),
+          "Set-Cookie": await storage.destroySession(
+            session.isOk() ? session.value.session : session.error.session
+          ),
         },
       });
     },

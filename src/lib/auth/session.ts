@@ -1,5 +1,5 @@
+import { err, ok, ResultAsync } from "neverthrow";
 import { createCookieSessionStorage } from "solid-start";
-import { Err, Ok } from "ts-results";
 import { z } from "zod";
 import { serverEnv } from "~/env/server";
 
@@ -20,13 +20,16 @@ const SessionSchema = z.object({
   email: z.string().email(),
 });
 
-export async function getSession(request: Request) {
-  const rawSession = await storage.getSession(request.headers.get("Cookie"));
-  const rawData = SessionSchema.safeParse({
-    email: rawSession.get("email"),
+export function getSession(request: Request) {
+  return ResultAsync.fromSafePromise(
+    storage.getSession(request.headers.get("Cookie"))
+  ).andThen((session) => {
+    const data = SessionSchema.safeParse({
+      email: session.get("email"),
+    });
+    return data.success
+      ? ok({ data: data.data, session })
+      : // on error we can return created session anyway
+        err({ error: data.error, session });
   });
-  if (!rawData.success) {
-    return Err(rawData.error);
-  }
-  return Ok({ data: rawData.data, session: rawSession });
 }

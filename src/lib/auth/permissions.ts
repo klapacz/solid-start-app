@@ -4,7 +4,7 @@ import { getSession } from "./session";
 export function unprotected$() {
   createServerData$(async (_, { request }) => {
     const session = await getSession(request);
-    if (session.ok) {
+    if (session.isOk()) {
       throw redirect("/");
     }
   });
@@ -14,10 +14,10 @@ export function protected$() {
   return createServerData$(
     async (_, { request }) => {
       const session = await getSession(request);
-      if (session.err) {
+      if (session.isErr()) {
         throw redirect("/login");
       }
-      return session.val.data;
+      return session.value.data;
     },
     {
       key: ["session"],
