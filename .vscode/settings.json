@@ -1,3 +1,17 @@
 {
-  "cSpell.words": ["authed", "getdel", "neverthrow", "trpc", "UPSTASH"]
+  "cSpell.words": [
+    "authed",
+    "codegen",
+    "getdel",
+    "kysely",
+    "neverthrow",
+    "ossp",
+    "plpgsql",
+    "solidjs",
+    "tailwindcss",
+    "tanstack",
+    "trpc",
+    "undici",
+    "UPSTASH"
+  ]
 }

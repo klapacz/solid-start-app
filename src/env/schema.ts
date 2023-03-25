@@ -8,6 +8,7 @@ export const serverScheme = z.object({
     .string()
     .default("1")
     .transform((v) => parseInt(v)),
+  DATABASE_URL: z.string().url(),
   UPSTASH_REDIS_REST_URL: z.string().url(),
   UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
   // generate with: `openssl rand -base64 32`
