@@ -1,6 +1,7 @@
 import { Suspense, type VoidComponent } from "solid-js";
 import { useRouteData } from "solid-start";
-import { createLogoutAction$, protected$ } from "./api/auth/login";
+import { createLogoutAction$ } from "~/lib/auth/actions";
+import { protected$ } from "~/lib/auth/permissions";
 
 export function routeData() {
   return protected$();

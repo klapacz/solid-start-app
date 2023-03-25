@@ -1,6 +1,6 @@
 import { createSignal, type VoidComponent } from "solid-js";
+import { unprotected$ } from "~/lib/auth/permissions";
 import { trpc } from "~/utils/trpc";
-import { unprotected$ } from "./api/auth/login";
 
 export function routeData() {
   return unprotected$();
