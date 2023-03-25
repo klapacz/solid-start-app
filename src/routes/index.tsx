@@ -1,29 +1,27 @@
-import { createSignal, Suspense, type VoidComponent } from "solid-js";
-import { createServerData$, redirect } from "solid-start/server";
-import { z } from "zod";
-import { trpc } from "~/utils/trpc";
-import { storage } from "./api/auth/login";
+import { Suspense, type VoidComponent } from "solid-js";
+import { useRouteData } from "solid-start";
+import { createLogoutAction$, protected$ } from "./api/auth/login";
 
 export function routeData() {
-  return createServerData$(async (_, { request }) => {
-    const session = await storage.getSession(request.headers.get("Cookie"));
-    const email = z.string().email().safeParse(session.get("email"));
-
-    if (!email.success) {
-      throw redirect("/login");
-    }
-  });
+  return protected$();
 }
 
 const Home: VoidComponent = () => {
-  const [name, setName] = createSignal("");
-  const session = trpc.example.auth.session.useQuery();
+  const [, logout] = createLogoutAction$();
+  const session = useRouteData<typeof routeData>();
 
   return (
     <div class="rounded-md border border-slate-100 bg-white p-4 shadow-md dark:border-slate-800 dark:bg-slate-800">
-      <Suspense fallback={"loading"}>{session.data?.email}</Suspense>
-
-      <input type="text" onChange={(e) => setName(e.currentTarget.value)} />
+      <button
+        onClick={() => {
+          console.log("logout fe");
+          logout();
+        }}
+        class="border-red-500 border-2"
+      >
+        Logout
+      </button>
+      <Suspense fallback={"loading"}>{session()?.email}</Suspense>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { authedProcedure, procedure, router } from "../utils";
+import { procedure, router } from "../utils";
 import { v4 as uuid } from "uuid";
 import { redis } from "~/server/redis";
 
@@ -26,11 +26,6 @@ export default router({
         console.log("login url:", url);
         return null;
       }),
-    session: authedProcedure.query(async ({ ctx }) => {
-      return {
-        email: ctx.session.data.email,
-      };
-    }),
   }),
   hello: procedure
     .input(z.object({ name: z.string() }))

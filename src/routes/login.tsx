@@ -1,18 +1,9 @@
 import { createSignal, type VoidComponent } from "solid-js";
-import { createServerData$, redirect } from "solid-start/server";
-import { z } from "zod";
 import { trpc } from "~/utils/trpc";
-import { storage } from "./api/auth/login";
+import { unprotected$ } from "./api/auth/login";
 
 export function routeData() {
-  return createServerData$(async (_, { request }) => {
-    const session = await storage.getSession(request.headers.get("Cookie"));
-    const email = z.string().email().safeParse(session.get("email"));
-
-    if (email.success) {
-      throw redirect("/");
-    }
-  });
+  return unprotected$();
 }
 
 const LoginPage: VoidComponent = () => {
