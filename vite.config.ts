@@ -4,6 +4,18 @@ import vercel from "solid-start-vercel";
 
 export default defineConfig(() => {
   return {
+    test: {
+      // environment: "jsdom",
+      // transformMode: {
+      //   web: [/.[jt]sx?/],
+      // },
+      threads: false,
+      isolate: false,
+    },
+    resolve: {
+      conditions: ["development", "browser"],
+    },
+
     plugins: [solid({ ssr: true, adapter: vercel({ edge: false }) })],
   };
 });
