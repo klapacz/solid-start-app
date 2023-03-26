@@ -1,6 +1,7 @@
 import solid from "solid-start/vite";
 import { defineConfig } from "vite";
 import vercel from "solid-start-vercel";
+import prpc from "@prpc/vite";
 
 export default defineConfig(() => {
   return {
@@ -16,6 +17,6 @@ export default defineConfig(() => {
     //   conditions: ["development", "browser"],
     // },
 
-    plugins: [solid({ ssr: true, adapter: vercel({ edge: false }) })],
+    plugins: [prpc(), solid({ ssr: true, adapter: vercel({ edge: false }) })],
   };
 });

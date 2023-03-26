@@ -1,6 +1,7 @@
 // @refresh reload
 import "./root.css";
 
+import { QueryProvider } from "@prpc/solid";
 import { Suspense } from "solid-js";
 import {
   Body,
@@ -14,7 +15,6 @@ import {
   Title,
   Link,
 } from "solid-start";
-import { trpc, queryClient } from "~/utils/trpc";
 
 export default function Root() {
   return (
@@ -28,7 +28,7 @@ export default function Root() {
         <Link rel="icon" href="/favicon.ico" />
       </Head>
       <Body class="min-h-screen bg-white font-sans text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-50">
-        <trpc.Provider queryClient={queryClient}>
+        <QueryProvider>
           <Suspense>
             <ErrorBoundary>
               <Routes>
@@ -36,7 +36,7 @@ export default function Root() {
               </Routes>
             </ErrorBoundary>
           </Suspense>
-        </trpc.Provider>
+        </QueryProvider>
         <Scripts />
       </Body>
     </Html>

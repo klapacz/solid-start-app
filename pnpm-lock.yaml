@@ -3,11 +3,11 @@ lockfileVersion: 5.4
 specifiers:
   '@faker-js/faker': ^7.6.0
   '@kobalte/core': ^0.8.1
+  '@prpc/solid': ^0.2.18
+  '@prpc/vite': ^0.3.10
   '@solidjs/meta': ^0.28.2
   '@solidjs/router': ^0.7.0
-  '@tanstack/solid-query': ^5.0.0-alpha.2
-  '@trpc/client': ^10.12.0
-  '@trpc/server': ^10.12.0
+  '@tanstack/solid-query': 5.0.0-alpha.7
   '@types/debug': ^4.1.7
   '@types/node': ^18.14.0
   '@types/pg': ^8.6.6
@@ -27,9 +27,7 @@ specifiers:
   solid-js: ^1.6.11
   solid-start: ^0.2.21
   solid-start-node: ^0.2.21
-  solid-start-trpc: ^0.0.16
   solid-start-vercel: ^0.2.21
-  solid-trpc: 0.1.0-sssr.7
   tailwindcss: ^3.2.7
   ts-pattern: ^4.2.2
   typescript: ^4.9.5
@@ -41,11 +39,11 @@ specifiers:
 
 dependencies:
   '@kobalte/core': 0.8.1_solid-js@1.6.15
+  '@prpc/solid': 0.2.18_evjf7oidi6souoofror2jua5sa
+  '@prpc/vite': 0.3.10_vite@4.2.1
   '@solidjs/meta': 0.28.2_solid-js@1.6.15
   '@solidjs/router': 0.7.1_solid-js@1.6.15
   '@tanstack/solid-query': 5.0.0-alpha.7_solid-js@1.6.15
-  '@trpc/client': 10.18.0_@trpc+server@10.18.0
-  '@trpc/server': 10.18.0
   '@upstash/redis': 1.20.1
   kysely: 0.23.5
   neverthrow: 6.0.0
@@ -53,8 +51,6 @@ dependencies:
   pg-error-enum: 0.6.0
   solid-js: 1.6.15
   solid-start: 0.2.23_pc3ngfh4lero77uk2crhxvl7ye
-  solid-start-trpc: 0.0.16_nclumxup4vvamaixskc4tjj3ou
-  solid-trpc: 0.1.0-sssr.7_2hvsn6mew3f4be6o4edvawygye
   ts-pattern: 4.2.2
   undici: 5.20.0
   uuid: 9.0.0
@@ -1566,6 +1562,48 @@ packages:
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
 
+  /@prpc/core/0.3.3_zod@3.21.4:
+    resolution: {integrity: sha512-N8IGYxNlGPBFLxH8mrvZ6N+yWMa+/6wwGUiED5x9LzzFPC3NUFxQxDlfjo+s50r+hQ4Tdxqtg5uNioe5DXuhDw==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      zod: ^3.20.6
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      zod: 3.21.4
+    dev: false
+
+  /@prpc/solid/0.2.18_evjf7oidi6souoofror2jua5sa:
+    resolution: {integrity: sha512-uGhaSwwkLJ1Qzej4xcyDyjN2ix6k88vBYFjho/oHrDeJmak34j4NA9ihaC2TTsREu4J+vyrLhKjC2vvLyYvTqQ==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@tanstack/solid-query': ^v5.0.0-alpha.2
+      solid-js: ^1.5.3
+      zod: ^3.20.6
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      '@prpc/core': 0.3.3_zod@3.21.4
+      '@tanstack/solid-query': 5.0.0-alpha.7_solid-js@1.6.15
+      solid-js: 1.6.15
+      zod: 3.21.4
+    dev: false
+
+  /@prpc/vite/0.3.10_vite@4.2.1:
+    resolution: {integrity: sha512-3RJrg7up5UbodlwhqMvE7VMKofKlbvl2X6CQGVzROmcUyaKGEtOGDGZ+PSMzsZHxwhWNqCZA4Kpol6jCHjQRFA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vite: ^3 || ^4
+    dependencies:
+      '@babel/core': 7.21.3
+      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.3
+      vite: 4.2.1_@types+node@18.15.5
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@rollup/plugin-commonjs/24.0.1_rollup@3.20.1:
     resolution: {integrity: sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==}
     engines: {node: '>=14.0.0'}
@@ -1746,18 +1784,6 @@ packages:
     dependencies:
       '@tanstack/query-core': 5.0.0-alpha.7
       solid-js: 1.6.15
-    dev: false
-
-  /@trpc/client/10.18.0_@trpc+server@10.18.0:
-    resolution: {integrity: sha512-2d+6r2C/xygTjDWX9jT66defgHzbQP0Z8vrvyT3XtPjqU6JNlRNuS2ZtB8xDPdOQUUVnndzZ43BMr+Zu49K0OQ==}
-    peerDependencies:
-      '@trpc/server': 10.18.0
-    dependencies:
-      '@trpc/server': 10.18.0
-    dev: false
-
-  /@trpc/server/10.18.0:
-    resolution: {integrity: sha512-nVMqdDIF9YLOeC3g6RdAvdCPqkHFjpshSqZGThZ+fyjiWSUXj2ZKCduhJFnY77TjtgODojeaaghmzcnjxb+Onw==}
     dev: false
 
   /@types/babel__core/7.20.0:
@@ -4520,20 +4546,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /solid-start-trpc/0.0.16_nclumxup4vvamaixskc4tjj3ou:
-    resolution: {integrity: sha512-99/EGIE0SObmCVhZR00bYpkEQpCDP22YgjalQpVgm0BKy2+tJzEC6vdvOII2Ppa0Fm7iPwc4LDZoFX2E3KYmsg==}
-    peerDependencies:
-      '@trpc/client': ^10.0.0
-      '@trpc/server': ^10.0.0
-      solid-js: ^1.5.7
-      solid-start: ^0.2.1
-    dependencies:
-      '@trpc/client': 10.18.0_@trpc+server@10.18.0
-      '@trpc/server': 10.18.0
-      solid-js: 1.6.15
-      solid-start: 0.2.23_pc3ngfh4lero77uk2crhxvl7ye
-    dev: false
-
   /solid-start-vercel/0.2.23_56rdvx36cvogm7gqo4fl2sycqq:
     resolution: {integrity: sha512-DMj1jocWDBzQilUaymTg9bpX18po/7Tuig+0B9rSGcNO3uDGXpoaNJtZpLzqcgvsOJPaDK/CIZUT788apUX68Q==}
     peerDependencies:
@@ -4627,22 +4639,6 @@ packages:
       wait-on: 6.0.1_debug@4.3.4
     transitivePeerDependencies:
       - supports-color
-
-  /solid-trpc/0.1.0-sssr.7_2hvsn6mew3f4be6o4edvawygye:
-    resolution: {integrity: sha512-N/iqU4iFIVEWKFjOY+5J4e2qbOW9STy/eEID1gEjj6mm0w9xYmQtKu/UsBNf8W6nSCYSBjH/ttU5fGCe/0q2Dw==}
-    peerDependencies:
-      '@tanstack/solid-query': ^5.0.0-alpha.0
-      '@trpc/client': ^10.0.0-rc.2
-      '@trpc/server': ^10.0.0-rc.2
-      solid-js: ^1.5.3
-      solid-start: ^0.2.1
-    dependencies:
-      '@tanstack/solid-query': 5.0.0-alpha.7_solid-js@1.6.15
-      '@trpc/client': 10.18.0_@trpc+server@10.18.0
-      '@trpc/server': 10.18.0
-      solid-js: 1.6.15
-      solid-start: 0.2.23_pc3ngfh4lero77uk2crhxvl7ye
-    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}

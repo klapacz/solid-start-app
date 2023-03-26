@@ -3,7 +3,7 @@ import { redirect } from "solid-start/api";
 import { json } from "solid-start/api";
 import { storage } from "~/lib/auth/session";
 import { Users } from "~/lib/auth/user";
-import { redis } from "~/server/redis";
+import { redis } from "~/lib/core/redis";
 
 export async function GET({ request }: APIEvent) {
   const url = new URL(request.url);
