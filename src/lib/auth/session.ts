@@ -20,6 +20,8 @@ const SessionSchema = z.object({
   email: z.string().email(),
 });
 
+export type SessionData = z.infer<typeof SessionSchema>;
+
 export function getSession(request: Request) {
   return ResultAsync.fromSafePromise(
     storage.getSession(request.headers.get("Cookie"))

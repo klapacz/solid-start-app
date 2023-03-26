@@ -1,15 +1,9 @@
-import { Suspense, type VoidComponent } from "solid-js";
-import { useRouteData } from "solid-start";
+import { type VoidComponent } from "solid-js";
 import { createLogoutAction$ } from "~/lib/auth/actions";
-import { protected$ } from "~/lib/auth/permissions";
+import { withProtection } from "~/lib/auth/permissions";
 
-export function routeData() {
-  return protected$();
-}
-
-const Home: VoidComponent = () => {
+const Home: VoidComponent = withProtection((props) => {
   const [, logout] = createLogoutAction$();
-  const session = useRouteData<typeof routeData>();
 
   return (
     <div class="rounded-md border border-slate-100 bg-white p-4 shadow-md dark:border-slate-800 dark:bg-slate-800">
@@ -22,9 +16,9 @@ const Home: VoidComponent = () => {
       >
         Logout
       </button>
-      <Suspense fallback={"loading"}>{session()?.email}</Suspense>
+      {props.session.email}
     </div>
   );
-};
+});
 
 export default Home;
