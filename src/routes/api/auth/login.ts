@@ -18,7 +18,8 @@ export async function GET({ request }: APIEvent) {
   }
   const user = await Users.updateSetConfirmed(userId);
   if (user.isErr()) {
-    return json("Server error.", { status: 500 });
+    console.error("Confirming user failed:", user.error);
+    return json({ message: "Server error." }, { status: 500 });
   }
 
   const session = await storage.getSession();
