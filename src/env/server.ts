@@ -11,7 +11,14 @@ export const formatErrors = (
     })
     .filter(Boolean);
 
-const env = serverScheme.safeParse(process.env);
+const env = serverScheme.safeParse({
+  NODE_ENV: process.env.NODE_ENV,
+  ENABLE_VC_BUILD: process.env.ENABLE_VC_BUILD,
+  DATABASE_URL: process.env.DATABASE_URL,
+  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+  SESSION_SECRET: process.env.SESSION_SECRET,
+});
 
 if (env.success === false) {
   console.error(
