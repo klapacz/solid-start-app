@@ -17,6 +17,6 @@ export default defineConfig(() => {
     //   conditions: ["development", "browser"],
     // },
 
-    plugins: [prpc(), solid({ ssr: true, adapter: vercel({ edge: false }) })],
+    plugins: [prpc(), solid({ ssr: true, adapter: vercel({ edge: true }) })],
   };
 });
