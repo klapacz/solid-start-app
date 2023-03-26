@@ -1,6 +1,6 @@
 import { Kysely, PostgresDialect } from "kysely";
 import type { DB } from "./schema.generated";
-import { Pool } from "pg";
+import { Pool } from "@neondatabase/serverless";
 import { serverEnv } from "~/env/server";
 
 export const db = new Kysely<DB>({

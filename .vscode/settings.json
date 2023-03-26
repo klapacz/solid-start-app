@@ -5,6 +5,7 @@
     "getdel",
     "kobalte",
     "kysely",
+    "neondatabase",
     "neverthrow",
     "ossp",
     "plpgsql",
